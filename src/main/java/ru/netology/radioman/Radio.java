@@ -11,6 +11,12 @@ public class Radio {
     private int volume = 0;
     private int maxCountRadiostation;
 
+    public Radio() {
+    }
+    public Radio(int maxCountRadiostation) {
+        this.maxCountRadiostation = maxCountRadiostation;
+    }
+
     public int getMaxCountRadiostation() {
         return maxCountRadiostation;
     }
