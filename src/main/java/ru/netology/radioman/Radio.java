@@ -1,11 +1,11 @@
 package ru.netology.radioman;
 
-/*
-Номер текущей радиостанции изменяется в пределах от 0 до 9
-Если текущая радиостанция - 9 и клиент нажал на кнопку next (следующая) на пульте, то текущей должна стать 0-ая
-Если текущая радиостанция - 0 и клиент нажал на кнопку prev (предыдущая) на пульте, то текущей должна стать 9-ая
-Клиент должен иметь возможность выставлять номер радиостанции с цифрового пульта (вводя числа 0 - 9)
-* */
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
 public class Radio {
     private int numberOfActualRadioStation = 0;
     private int volume = 0;
@@ -14,18 +14,8 @@ public class Radio {
     private int minVolume=0;
     private int maxVolume=100;
 
-    public Radio() {
-    }
-    public Radio(int maxCountRadiostation) {
-        this.maxCountRadiostation = maxCountRadiostation;
-    }
-
-    public int getMaxCountRadiostation() {
-        return maxCountRadiostation;
-    }
-
-    public int getNumberOfActualRadioStation() {
-        return numberOfActualRadioStation;
+    Radio(int maxCountRadiostation){
+        this.maxCountRadiostation=maxCountRadiostation;
     }
 
     public void setNumberOfActualRadioStation(int number) {
@@ -45,22 +35,6 @@ public class Radio {
         int radiostation = this.getNumberOfActualRadioStation();
         if (radiostation == 0) setNumberOfActualRadioStation(this.maxCountRadiostation);
         else setNumberOfActualRadioStation(--radiostation);
-    }
-
-
-    public int getMinVolume() {
-        return minVolume;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
     }
 
     public void upperVolume() {
