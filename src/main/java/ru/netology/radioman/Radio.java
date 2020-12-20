@@ -7,46 +7,58 @@ package ru.netology.radioman;
 Клиент должен иметь возможность выставлять номер радиостанции с цифрового пульта (вводя числа 0 - 9)
 * */
 public class Radio {
-    private int numberOfActualRadioStation=0;
+    private int numberOfActualRadioStation = 0;
     private int volume = 0;
+    private int maxCountRadiostation;
+
+    public int getMaxCountRadiostation() {
+        return maxCountRadiostation;
+    }
+
+    public void setMaxCountRadiostation(int maxCountRadiostation) {
+        this.maxCountRadiostation = maxCountRadiostation;
+    }
 
     public int getNumberOfActualRadioStation() {
         return numberOfActualRadioStation;
     }
 
     public void setNumberOfActualRadioStation(int number) {
-        if(number>=0 && number<10) this.numberOfActualRadioStation = number;
+        if (number >= 0 && number < 10) this.numberOfActualRadioStation = number;
     }
 
-    public void next(){
+    public void next() {
         int radiostation = this.getNumberOfActualRadioStation();
-        if(radiostation == 9){
+        if (radiostation == 9) {
             setNumberOfActualRadioStation(0);
         } else {
             setNumberOfActualRadioStation(++radiostation);
         }
     }
-    public void prev(){
+
+    public void prev() {
         int radiostation = this.getNumberOfActualRadioStation();
-        if(radiostation == 0) setNumberOfActualRadioStation(9);
+        if (radiostation == 0) setNumberOfActualRadioStation(9);
         else setNumberOfActualRadioStation(--radiostation);
     }
 
     public int getVolume() {
         return volume;
     }
+
     public void setVolume(int volume) {
         this.volume = volume;
     }
 
-    public void upperVolume(){
+    public void upperVolume() {
         int volume = this.getVolume();
-        if (volume==10) setVolume(0);
+        if (volume == 10) setVolume(0);
         else setVolume(++volume);
     }
-    public void lessVolume(){
+
+    public void lessVolume() {
         int volume = this.getVolume();
-        if (volume==0) setVolume(10);
+        if (volume == 0) setVolume(10);
         else setVolume(--volume);
     }
 
