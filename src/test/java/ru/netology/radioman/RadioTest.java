@@ -12,11 +12,10 @@ class RadioTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'numberRadiostation',11,11",
-                    "'numberRadiostation 5',5,0",
-                    "'numberRadiostation 20',20,9",
-                    "'without numberRadiostation',0,10",
-                    "'incorrect number(0)',0,10",
+                    "'numberRadiostation_11',11,11",
+                    "'numberRadiostation_5',5,5",
+                    "'numberRadiostation 20',20,20",
+                    "'numberRadiostation 0',0,0",
             }
     )
     void createRadioWithConstructor(String text, int maxCountRadiostation, int expected) {
@@ -25,6 +24,7 @@ class RadioTest {
         assertEquals(expected, actual);
 
     }
+
     @ParameterizedTest
     @CsvSource(
             value = {
@@ -41,23 +41,40 @@ class RadioTest {
     @CsvSource(
             value = {
                     "'maxCountRadioSation_20AndRadioStation_20',20,20,20",
-                    "'maxCountRadioSation_20AndRadioStation_10',20,10,20",
-                    "'maxCountRadioSation_0AndRadioStation_10',0,10,10",
-                    "'maxCountRadioSation_0AndRadioStation_9',0,9,9",
+                    "'maxCountRadioSation_20AndRadioStation_10',20,10,10",
+                    "'maxCountRadioSation_0AndRadioStation_10',0,10,0",
+                    "'maxCountRadioSation_0AndRadioStation_0',0,0,0",
             }
     )
-    void setNumberOfActualRadioStation(String text, int maxCountRadioStation, int actualRadioStation, int expected) {
+    void setNumberOfActualRadioStationWithConstructor(String text, int maxCountRadioStation, int actualRadioStation, int expected) {
+
+        Radio radio = new Radio(maxCountRadioStation);
+        radio.setNumberOfActualRadioStation(actualRadioStation);
+        int actual = radio.getNumberOfActualRadioStation();
+        assertEquals(expected, actual);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            value = {
+                    "'maxCountRadioSation_10AndRadioStation_5',10,5,5",
+                    "'maxCountRadioSation_10AndRadioStation_10',10,10,10",
+                    "'maxCountRadioSation_10AndRadioStation_0',10,0,0",
+            }
+    )
+    void setNumberOfActualRadioStationWithDefaultConstructor(String text, int maxCountRadioStation, int actualRadioStation, int expected) {
         //Допускается ли конструкция if в тестах или лучше сделать два отдельных теста?
-        if(maxCountRadioStation==0){
+        if (maxCountRadioStation == 0) {
             Radio radio = new Radio();
             radio.setNumberOfActualRadioStation(actualRadioStation);
             int actual = radio.getNumberOfActualRadioStation();
-            assertEquals(expected,actual);
-        }else{
+            assertEquals(expected, actual);
+        } else {
             Radio radio = new Radio(maxCountRadioStation);
             radio.setNumberOfActualRadioStation(actualRadioStation);
             int actual = radio.getNumberOfActualRadioStation();
-            assertEquals(expected,actual);
+            assertEquals(expected, actual);
         }
     }
 
@@ -65,7 +82,7 @@ class RadioTest {
     @CsvSource(
             value = {
                     "'maxCountRadioSation_20AndRadioStation_5',5,20,6",
-                    "'maxCountRadioSation_20AndRadioStation_20',20,20,1",
+                    "'maxCountRadioSation_20AndRadioStation_20',20,20,0",
                     "'maxCountRadioSation_20AndRadioStation_10',10,20,11",
                     "'maxCountRadioSation_0AndRadioStation_0',0,0,0",
                     "'maxCountRadioSation_9AndRadioStation_9',9,9,0",
@@ -78,12 +95,13 @@ class RadioTest {
         int actual = radio.getNumberOfActualRadioStation();
         assertEquals(expected, actual);
     }
+
     @ParameterizedTest
     @CsvSource(
             value = {
                     "'maxCountRadioSation_10AndRadioStation_5',5,6",
                     "'maxCountRadioSation_10AndRadioStation_0',0,1",
-                    "'maxCountRadioSation_9AndRadioStation_9',9,0",
+                    "'maxCountRadioSation_10AndRadioStation_10',10,0",
             }
     )
     void nextRadioStationWithDefaultConstructor(String text, int radioStation, int expected) {
@@ -118,7 +136,7 @@ class RadioTest {
             value = {
                     "'maxCountRadioSation_10AndRadioStation_5',5,4",
                     "'maxCountRadioSation_10AndRadioStation_0',0,10",
-                    "'maxCountRadioSation_9AndRadioStation_9',9,8",
+                    "'maxCountRadioSation_10AndRadioStation_9',9,8",
             }
     )
     void prevRadioStationWithDefaultConstructor(String text, int radioStation, int expected) {

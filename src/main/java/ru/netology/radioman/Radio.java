@@ -9,7 +9,10 @@ package ru.netology.radioman;
 public class Radio {
     private int numberOfActualRadioStation = 0;
     private int volume = 0;
-    private int maxCountRadiostation;
+    private int maxCountRadiostation=10;
+
+    private int minVolume=0;
+    private int maxVolume=100;
 
     public Radio() {
     }
@@ -21,21 +24,17 @@ public class Radio {
         return maxCountRadiostation;
     }
 
-    public void setMaxCountRadiostation(int maxCountRadiostation) {
-        this.maxCountRadiostation = maxCountRadiostation;
-    }
-
     public int getNumberOfActualRadioStation() {
         return numberOfActualRadioStation;
     }
 
     public void setNumberOfActualRadioStation(int number) {
-        if (number >= 0 && number < 10) this.numberOfActualRadioStation = number;
+        if (number <= maxCountRadiostation) this.numberOfActualRadioStation = number;
     }
 
     public void next() {
         int radiostation = this.getNumberOfActualRadioStation();
-        if (radiostation == 9) {
+        if (radiostation == this.maxCountRadiostation) {
             setNumberOfActualRadioStation(0);
         } else {
             setNumberOfActualRadioStation(++radiostation);
@@ -44,10 +43,18 @@ public class Radio {
 
     public void prev() {
         int radiostation = this.getNumberOfActualRadioStation();
-        if (radiostation == 0) setNumberOfActualRadioStation(9);
+        if (radiostation == 0) setNumberOfActualRadioStation(this.maxCountRadiostation);
         else setNumberOfActualRadioStation(--radiostation);
     }
 
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
     public int getVolume() {
         return volume;
     }
@@ -58,14 +65,15 @@ public class Radio {
 
     public void upperVolume() {
         int volume = this.getVolume();
-        if (volume == 10) setVolume(0);
+        if (volume == this.maxVolume) setVolume(this.maxVolume);
         else setVolume(++volume);
     }
 
     public void lessVolume() {
         int volume = this.getVolume();
-        if (volume == 0) setVolume(10);
+        if (volume == this.minVolume) setVolume(this.minVolume);
         else setVolume(--volume);
     }
+
 
 }
